@@ -23,3 +23,22 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import { fakerPT_BR as faker } from '@faker-js/faker';
+
+Cypress.Commands.add('generateFakeUser', () => {
+    const firstName = faker.person.firstName();
+    const lastName = faker.person.lastName();
+    return {
+        'name': `${firstName} ${lastName}`,
+        'email': faker.internet.email({ firstName: firstName, lastName: lastName }),
+        'password': faker.internet.password({ length: 10 }),
+    }
+})
+
+Cypress.Commands.add('generateFakeTask', () => {
+    return {
+        'title': `${faker.lorem.words(3)}`,
+        'description': `${faker.internet.url()}`
+    }
+})
