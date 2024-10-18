@@ -44,7 +44,7 @@ Cypress.Commands.add('generateFakeTask', () => {
 })
 
 //Envia requisição para cadastrar usuário pela API
-Cypress.Commands.add('createUser', () => {
+Cypress.Commands.add('createUserApi', () => {
     cy.generateFakeUser().then(fakeUser => {
         const body = {
             "name": fakeUser.name,
@@ -59,7 +59,10 @@ Cypress.Commands.add('createUser', () => {
             expect(response.body.msg, "Retorno mensagem de sucesso").to.be.eql("Sucesso ao cadastrar usuario");
             expect(response.body.data.id, "Retorno ID do usuário.").to.be.an("number");
             //Retorna os dados do usuário
-            return response.body.data;
+            return body;
         })
+
+        //Salva os dados do usuario no fixtures para reutilização nos demais testes.
+        cy.writeFile('cypress/fixtures/createUserApi.json', body);
     })
 })
