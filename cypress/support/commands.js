@@ -66,3 +66,22 @@ Cypress.Commands.add('createUserApi', () => {
         cy.writeFile('cypress/fixtures/createUserApi.json', body);
     })
 })
+
+//Realiza autenticação com session
+Cypress.Commands.add('login', (email, password, name) => {
+    cy.session([email, password], () => {
+        cy.intercept("GET", "api/todos").as("getTodos")
+        cy.visit('/login');
+        cy.get('[data-cy="email-input"]').type(email)
+        cy.get('[data-cy="password-input"]').type(password)
+        cy.get('[data-cy="submit-button"]').click();
+        cy.url().should('include', '/dashboard');
+
+        //Aguarda carregar a dashboard
+        cy.wait("@getTodos");
+        
+        cy.get('[data-cy="name-user-span"]')
+            .should("be.visible")
+            .should("have.text", name);
+    })
+})
