@@ -10,7 +10,7 @@ Como um novo usuário, quero ser capaz de me cadastrar no sistema utilizando um 
 2. O usuário deve definir uma senha com um mínimo de 6 caracteres (campo obrigatório).
 3. O sistema deve verificar se o email já está registrado.
 4. O sistema deve enviar um email de confirmação de cadastro (opcional).
-O usuário deve receber uma mensagem de sucesso ou erro após o cadastro.
+5. O usuário deve receber uma mensagem de sucesso ou erro após o cadastro.
 
 ### Casos de testes
 
@@ -102,10 +102,6 @@ Como um usuário, eu quero ser capaz de criar uma nova tarefa, especificando um 
     - **Passos**: Iniciar o processo de criação, preencher os campos e clicar em "Cancelar".
     - **Resultado esperado**: Nenhuma tarefa é criada.
 
-## tempo de teste e demonstre como fez o cálculo
-    ```bash
-    Realizar calculo
-    ```
 # Testes Automatizados
 
 ## Testes de Funcionalidade
@@ -130,3 +126,33 @@ Como um usuário, eu quero ser capaz de criar uma nova tarefa, especificando um 
 - **Caso de Teste 2**: Criação de tarefa com campo de descrição vazio
 - **Caso de Teste 3**: Tentativa de criação tarefa com o campo de título vazio
 - **Caso de Teste 4**: Teste de cancelamento da criação de uma nova tarefa
+
+## Tempo de teste
+
+Para calcular tempo dos testes utilizei a seguinte fórmulas:
+
+- (ME) - Media de execução dos 15 casos de testes.
+- (MP) - Media do tempo de preparação do ambiente.
+- (MC) - Margem de contigencia de 10%
+- (TT) - Tempo de teste TT = ME + MT + MC
+
+Cálculos
+```bash
+# Foi utilizado os tempo de execução do pipeline
+
+# Tempo de execução dos testes nos ultimos 3 pipelines
+ME = (1,45m + 1,24m + 1,18m) / 3;
+ME = 1,79m
+
+# Tempo de execução de instalação das dependencias nos ultimos 3 pipelines
+MP = (0,69m + 0,29m + 0,28m) / 3;
+MP = 0,42m
+
+# MC = (ME + MP) * 0,10
+MC = (1,79m + 0,42m) ∗ 0,10 = 0,221 minutos
+
+#TT = ME + MT + MC
+TT = 1,79m + 0,42m + 0,221m
+
+TT = 2 minutos e 43 segundos.
+```
