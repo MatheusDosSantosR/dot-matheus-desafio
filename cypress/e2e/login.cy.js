@@ -56,6 +56,7 @@ describe('Login de Usuário', () => {
                 .should("be.visible");
         })
     })
+
     it('Tentativa de login com email não cadastrado', () => {
         const email = "emailNaoExiste@invalido.com";
         const password = "senhaAqui";
@@ -79,6 +80,7 @@ describe('Login de Usuário', () => {
         cy.contains("Credenciais inválidas !")
             .should("be.visible");
     })
+
     it('Tentativa de login com senha menor que 6 caracteres', () => {
         cy.fixture("createUserApi.json").then((user) => {
             const failPassword = "123";
@@ -102,6 +104,7 @@ describe('Login de Usuário', () => {
                 .should("be.visible");
         })
     })
+
     it('Tentativa de login com campos obrigatórios vazios', () => {
         //Clica para realizar login
         cy.get('[data-cy="submit-button"]')
@@ -116,7 +119,8 @@ describe('Login de Usuário', () => {
         cy.contains("A senha deve ter pelo menos 6 caracteres")
             .should("be.visible");
     })
-    it.only('Teste de logout', () => {
+    
+    it('Teste de logout', () => {
         //Reliza login normalmente
         cy.fixture("createUserApi.json").then(user => {
             //Email
