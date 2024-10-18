@@ -25,3 +25,12 @@ jobs:
 
       - name: Run Cypress tests on ${{ matrix.browser }}
         run: npx cypress run --browser ${{ matrix.browser }}
+
+      - name: Upload Cypress artifacts
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-artifacts
+          path: |
+            cypress/screenshots
+            cypress/videos
