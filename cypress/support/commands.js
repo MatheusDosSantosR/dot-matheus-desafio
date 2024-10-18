@@ -42,3 +42,24 @@ Cypress.Commands.add('generateFakeTask', () => {
         'description': `${faker.internet.url()}`
     }
 })
+
+//Envia requisição para cadastrar usuário pela API
+Cypress.Commands.add('createUser', () => {
+    cy.generateFakeUser().then(fakeUser => {
+        const body = {
+            "name": fakeUser.name,
+            "email": fakeUser.email,
+            "password": fakeUser.password,
+            "confirmPassword": fakeUser.password
+        };
+
+        cy.request("POST", "/api/public/users", body).then(response => {
+            //Validações retorno da API do cadastro do usuario
+            expect(response.status, "Status code 201").to.eq(201);
+            expect(response.body.msg, "Retorno mensagem de sucesso").to.be.eql("Sucesso ao cadastrar usuario");
+            expect(response.body.data.id, "Retorno ID do usuário.").to.be.an("number");
+            //Retorna os dados do usuário
+            return response.body.data;
+        })
+    })
+})
