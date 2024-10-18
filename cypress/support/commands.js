@@ -39,7 +39,7 @@ Cypress.Commands.add('generateFakeUser', () => {
 Cypress.Commands.add('generateFakeTask', () => {
     return {
         'title': `${faker.lorem.words(3)}`,
-        'description': `${faker.internet.url()}`
+        'description': `${faker.lorem.lines(10)}`
     }
 })
 
@@ -79,7 +79,7 @@ Cypress.Commands.add('login', (email, password, name) => {
 
         //Aguarda carregar a dashboard
         cy.wait("@getTodos");
-        
+
         cy.get('[data-cy="name-user-span"]')
             .should("be.visible")
             .should("have.text", name);
