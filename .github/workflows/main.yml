@@ -28,9 +28,7 @@ jobs:
 
       - name: Upload Cypress artifacts
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-artifacts
-          path: |
-            cypress/screenshots
-            cypress/videos
+          path: cypress/screenshots
